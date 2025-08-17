@@ -1,0 +1,33 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-gradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00ffea"/>
+      <stop offset="100%" stop-color="#39ff14"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#bg-gradient)" />
+  <!-- Tech themed background pattern -->
+  <g opacity="0.15">
+    <circle cx="200" cy="100" r="50" fill="#0ff"/>
+    <rect x="1000" y="500" width="100" height="40" rx="20" fill="#0ff"/>
+    <polygon points="300,550 320,570 310,590" fill="#39ff14"/>
+    <!-- Add more tech shapes as desired -->
+  </g>
+  <!-- Mascot/Logo illustration placeholder -->
+  <ellipse cx="220" cy="315" rx="130" ry="180" fill="#003366" stroke="#39ff14" stroke-width="8"/>
+  <!-- Title -->
+  <text x="380" y="220" font-size="110" font-family="Impact, Arial Black, sans-serif" font-weight="bold" fill="#39ff14" filter="url(#glow)" stroke="#00ffea" stroke-width="2">CS2SNITCH</text>
+  <!-- Tagline -->
+  <text x="390" y="310" font-size="42" font-family="Arial, sans-serif" fill="#fff" opacity="0.95">Exposing CS2 Cheaters</text>
+  <!-- Streaming Platforms & Call to action -->
+  <text x="390" y="390" font-size="38" font-family="Arial, sans-serif" fill="#fff" font-weight="bold">Check out the live streams</text>
+  <text x="390" y="440" font-size="28" font-family="Arial, sans-serif" fill="#00ffea">Streaming on all platforms · Opening CS2 cases · Giveaways</text>
+  <!-- Add streaming platform icons here if desired -->
+</svg>
