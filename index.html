@@ -27,68 +27,54 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-  <!-- KNIFY.GG Sponsor Bar -->
-<div class="sponsor-bar">
-  <div class="sponsor-wrap">
-    <span class="sponsor-pill">
-      <span class="sponsor-dot"></span>
-      Sponsored by
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="sponsor-logo">
-        <path d="M4 34L60 6c2-1 4 1 3 3L10 58c-1 1-3 0-3-2v-6l12-10-5-6-10 8v-8z" fill="#00ff9f"/>
-      </svg>
-      <a href="https://knify.gg/?aff=snitch" target="_blank" class="sponsor-link">KNIFY.GG</a> — 
-      Use code <strong>SNITCH</strong> for 20% OFF!
-    </span>
-  </div>
-</div>
-
-<style>
 /* Sponsor bar — KNIFY.GG Edition */
 .sponsor-bar {
   position: relative;
   z-index: 30;
-  background: linear-gradient(180deg, rgba(0,255,160,0.10), rgba(0,255,160,0.06)), #0c0c0c;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 6px 22px rgba(0,255,160,0.25);
+  background: linear-gradient(180deg, rgba(0,255,160,.10), rgba(0,255,160,.06)), #0c0c0c;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 6px 22px rgba(0,0,0,.35);
 }
 
+/* Wrapper for all sponsor elements */
 .sponsor-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 14px;
   padding: 10px 0;
-  color: #eafff7;
+  color: var(--sponsor-text, #eafff7);
   text-align: center;
   font-weight: 700;
   flex-wrap: wrap;
 }
 
+/* The rounded glowing capsule */
 .sponsor-pill {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 6px 14px;
+  gap: 8px;
+  padding: 6px 12px;
   border-radius: 999px;
-  background: rgba(0,255,160,0.15);
-  border: 1px solid rgba(0,255,160,0.45);
-  color: #eafff7;
-  text-shadow: 0 0 10px rgba(0,255,160,0.25);
+  background: rgba(0,255,160,.15);
+  border: 1px solid rgba(0,255,160,.45);
+  color: var(--sponsor-text, #eafff7);
+  text-shadow: 0 0 10px rgba(0,255,160,.18);
   transition: all 0.25s ease;
-  backdrop-filter: blur(4px);
 }
 
 .sponsor-pill:hover {
-  background: rgba(0,255,160,0.25);
-  border-color: rgba(0,255,160,0.65);
+  background: rgba(0,255,160,.25);
+  border-color: rgba(0,255,160,.6);
   transform: translateY(-1px);
-  box-shadow: 0 0 14px rgba(0,255,160,0.45);
+  box-shadow: 0 0 14px rgba(0,255,160,.45);
 }
 
+/* Sponsor link style */
 .sponsor-link {
-  color: #00ff9f;
+  color: var(--sponsor-accent, #00ff9f);
   font-weight: 800;
-  border-bottom: 2px solid #00ff9f;
+  border-bottom: 2px solid var(--sponsor-accent, #00ff9f);
   padding-bottom: 1px;
   text-decoration: none;
   transition: 0.25s;
@@ -99,26 +85,27 @@
   border-bottom-color: #62ffc9;
 }
 
+/* The glowing dot before text */
 .sponsor-dot {
   width: 8px;
   height: 8px;
   border-radius: 999px;
-  background: #00ff9f;
-  box-shadow: 0 0 12px rgba(0,255,160,0.7);
+  background: var(--sponsor-accent, #00ff9f);
+  box-shadow: 0 0 12px rgba(0,255,160,.7);
 }
 
+/* Optional: knife logo animation (if SVG added inline) */
 .sponsor-logo {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   filter: drop-shadow(0 0 6px rgba(0,255,160,0.7));
   animation: knifeGlow 2.5s infinite ease-in-out;
 }
 
 @keyframes knifeGlow {
-  0%, 100% { filter: drop-shadow(0 0 4px rgba(0,255,160,0.6)); opacity: 0.9; }
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(0,255,160,0.5)); opacity: 0.9; }
   50% { filter: drop-shadow(0 0 10px rgba(0,255,160,1)); opacity: 1; }
 }
-</style>
 
     /* Header */
     header{
