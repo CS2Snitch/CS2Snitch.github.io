@@ -27,6 +27,39 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
+      <style>
+    :root{
+      --bg:#0a0b10;
+      --elev:#0e111a;
+      --text:#eef3f8;
+      --muted:#a5b0c2;
+      --primary:#00ffd1;     /* neon mint */
+      --accent:#39a7ff;      /* electric blue */
+      --danger:#ff3b69;      /* hot pink/red accent */
+      --ring: drop-shadow(0 0 14px rgba(0,255,209,.55)) drop-shadow(0 0 34px rgba(57,167,255,.28));
+      --radius:14px;
+      --maxw:1160px;
+      /* Sponsor brand (HelloFresh inspired) */
+      --sponsor-bg:#0b0b0b;
+      --sponsor-text:#ffffff;
+      --sponsor-accent:#85c441; /* HelloFresh green */
+    }
+    * { box-sizing: border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+      background:
+        radial-gradient(1100px 600px at 10% -10%, rgba(57,167,255,.12) 0%, transparent 58%),
+        radial-gradient(1000px 600px at 90% 110%, rgba(0,255,209,.12) 0%, transparent 60%),
+        var(--bg);
+      color: var(--text);
+      line-height:1.55;
+    }
+    a{ color:var(--accent); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+    .container{ max-width: var(--maxw); margin-inline:auto; padding-inline:24px; }
+    
 /* Sponsor bar — KNIFY.GG Edition */
 .sponsor-bar {
   position: relative;
