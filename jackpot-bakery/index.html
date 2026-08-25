@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#160d20">
+  <meta name="color-scheme" content="dark">
+  <title>Jackpot Bakery</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="pixel-sky" aria-hidden="true">
+    <span class="star star-a"></span>
+    <span class="star star-b"></span>
+    <span class="star star-c"></span>
+    <span class="cloud cloud-a"></span>
+    <span class="cloud cloud-b"></span>
+  </div>
+
+  <div id="game" class="game-shell">
+    <header class="topbar panel">
+      <div class="brand" aria-label="Jackpot Bakery">
+        <div class="brand-mark" aria-hidden="true">
+          <span class="cookie-dot dot-a"></span>
+          <span class="cookie-dot dot-b"></span>
+          <span class="cookie-dot dot-c"></span>
+        </div>
+        <div class="brand-copy">
+          <h1>JACKPOT BAKERY</h1>
+          <p>Night Shift Arcade</p>
+        </div>
+      </div>
+
+      <div class="currency-strip" aria-live="polite">
+        <div class="currency crumb-currency">
+          <span class="currency-icon" aria-hidden="true">●</span>
+          <span>
+            <small>CRUMBS</small>
+            <strong id="crumbCount">25</strong>
+          </span>
+        </div>
+        <div class="currency gold-currency">
+          <span class="currency-icon" aria-hidden="true">◆</span>
+          <span>
+            <small>GOLDEN CRUMBS</small>
+            <strong id="goldCount">0</strong>
+          </span>
+        </div>
+        <div class="currency rate-currency">
+          <span class="currency-icon" aria-hidden="true">↻</span>
+          <span>
+            <small>PER SECOND</small>
+            <strong id="crumbRate">0</strong>
+          </span>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <button id="achievementsButton" class="icon-button" type="button" title="Achievements" aria-label="Open achievements">★</button>
+        <button id="settingsButton" class="icon-button" type="button" title="Settings" aria-label="Open settings">⚙</button>
+        <button id="fullscreenButton" class="icon-button" type="button" title="Fullscreen (F11)" aria-label="Toggle fullscreen">⛶</button>
+      </div>
+    </header>
+
+    <main class="play-layout">
+      <nav class="machine-panel panel" aria-label="Bakery ovens">
+        <div class="panel-heading">
+          <div>
+            <small>BAKERY FLOOR</small>
+            <h2>Ovens</h2>
+          </div>
+          <span id="machineCount" class="pill">1 / 5</span>
+        </div>
+        <div id="machineList" class="machine-list"></div>
+        <div class="rail-tip">
+          <span class="tip-icon">i</span>
+          <p>Unlock larger ovens to bake dramatically bigger batches.</p>
+        </div>
+      </nav>
+
+      <section class="arcade-stage panel" aria-labelledby="activeMachineName">
+        <div class="stage-heading">
+          <div>
+            <small id="activeMachineSubtitle">THE LITTLE OVEN THAT COULD</small>
+            <h2 id="activeMachineName">Copper Cookie</h2>
+          </div>
+          <div class="level-badge">
+            <small>LEVEL</small>
+            <strong id="activeLevel">1</strong>
+          </div>
+        </div>
+
+        <div class="hot-oven">
+          <div class="hot-label">
+            <span><b>HOT OVEN</b> <small id="hotStatus">Build heat with matches</small></span>
+            <strong id="comboLabel">COMBO ×0</strong>
+          </div>
+          <div class="meter-track" aria-label="Hot Oven meter">
+            <span id="hotMeterFill"></span>
+          </div>
+        </div>
+
+        <div id="slotCabinet" class="slot-cabinet">
+          <div class="cabinet-marquee">
+            <span class="marquee-light"></span>
+            <strong>FRESH BATCH</strong>
+            <span class="marquee-light"></span>
+          </div>
+          <div class="reel-window" aria-live="polite" aria-label="Slot reels">
+            <div class="reel" data-reel="0"><span class="symbol symbol-cookie">●</span><small>COOKIE</small></div>
+            <div class="reel" data-reel="1"><span class="symbol symbol-milk">M</span><small>MILK</small></div>
+            <div class="reel" data-reel="2"><span class="symbol symbol-star">★</span><small>SUGAR STAR</small></div>
+          </div>
+          <div class="payline" aria-hidden="true"><span></span><b>PAYLINE</b><span></span></div>
+          <button id="spinButton" class="spin-button" type="button">
+            <span class="button-shine" aria-hidden="true"></span>
+            <strong>BAKE!</strong>
+            <small>SPACE / A</small>
+          </button>
+          <p id="spinResult" class="spin-result">Press BAKE to start the night shift.</p>
+        </div>
+
+        <div class="upgrade-grid">
+          <button id="levelUpgradeButton" class="upgrade-card" type="button">
+            <span class="upgrade-icon">↑</span>
+            <span class="upgrade-copy">
+              <small>OVEN UPGRADE</small>
+              <strong>Increase Batch Size</strong>
+              <em id="levelUpgradeEffect">+14.5% base output</em>
+            </span>
+            <span class="upgrade-price"><b id="levelUpgradeCost">104</b><small>CRUMBS</small></span>
+          </button>
+          <button id="autoUpgradeButton" class="upgrade-card" type="button">
+            <span class="upgrade-icon">↻</span>
+            <span class="upgrade-copy">
+              <small>AUTO-BAKER</small>
+              <strong id="autoUpgradeTitle">Hire First Baker</strong>
+              <em id="autoUpgradeEffect">Bakes while you play</em>
+            </span>
+            <span class="upgrade-price"><b id="autoUpgradeCost">480</b><small>CRUMBS</small></span>
+          </button>
+        </div>
+
+        <div class="auto-row">
+          <label class="pixel-switch" for="autoToggle">
+            <input id="autoToggle" type="checkbox" checked>
+            <span class="switch-track"><span></span></span>
+            <b>AUTO-BAKE</b>
+          </label>
+          <div class="auto-progress"><span id="autoProgressFill"></span></div>
+          <span id="autoTimer">No baker hired</span>
+        </div>
+      </section>
+
+      <aside class="side-panel-stack">
+        <section class="panel stats-panel">
+          <div class="panel-heading">
+            <div>
+              <small>NIGHTLY NUMBERS</small>
+              <h2>Bakery Stats</h2>
+            </div>
+          </div>
+          <dl class="stats-list">
+            <div><dt>Lifetime crumbs</dt><dd id="statLifetime">25</dd></div>
+            <div><dt>Total bakes</dt><dd id="statSpins">0</dd></div>
+            <div><dt>Best combo</dt><dd id="statCombo">0</dd></div>
+            <div><dt>Jackpots</dt><dd id="statJackpots">0</dd></div>
+            <div><dt>Production</dt><dd id="statProduction">0/s</dd></div>
+          </dl>
+        </section>
+
+        <section class="panel prestige-panel">
+          <div class="prestige-art" aria-hidden="true">
+            <span class="gold-crumb">◆</span>
+            <span class="prestige-ray ray-a"></span>
+            <span class="prestige-ray ray-b"></span>
+          </div>
+          <small>GOLDEN RECIPE</small>
+          <h2>Prestige</h2>
+          <p>Restart your ovens and keep permanent Golden Crumb power.</p>
+          <div class="prestige-gain">
+            <span>RESET REWARD</span>
+            <strong>+<b id="prestigeGain">0</b> ◆</strong>
+          </div>
+          <button id="prestigeButton" class="gold-button" type="button" disabled>PRESTIGE BAKERY</button>
+          <small id="prestigeHint" class="prestige-hint">Bake 1M lifetime crumbs for the first Golden Crumb.</small>
+        </section>
+
+        <section class="panel perk-panel">
+          <div class="panel-heading">
+            <div>
+              <small>PERMANENT RECIPES</small>
+              <h2>Golden Perks</h2>
+            </div>
+          </div>
+          <div id="perkList" class="perk-list"></div>
+        </section>
+      </aside>
+    </main>
+
+    <footer class="statusbar panel">
+      <span><i class="status-light"></i> <b>AUTOSAVE</b> <em id="saveStatus">Ready</em></span>
+      <span id="musicStatus">♪ 48 KHZ THEME</span>
+      <span>V1.1.0</span>
+    </footer>
+  </div>
+
+  <div id="toastStack" class="toast-stack" aria-live="assertive"></div>
+
+  <dialog id="achievementsDialog" class="pixel-dialog">
+    <form method="dialog" class="dialog-frame">
+      <header>
+        <div>
+          <small>BAKER'S LEDGER</small>
+          <h2>Achievements</h2>
+        </div>
+        <button class="dialog-close icon-button" value="close" aria-label="Close achievements">×</button>
+      </header>
+      <div class="achievement-summary">
+        <span id="achievementProgress">0 / 25 unlocked</span>
+        <div class="meter-track"><span id="achievementMeter"></span></div>
+      </div>
+      <div id="achievementGrid" class="achievement-grid"></div>
+    </form>
+  </dialog>
+
+  <dialog id="settingsDialog" class="pixel-dialog">
+    <form method="dialog" class="dialog-frame settings-frame">
+      <header>
+        <div>
+          <small>CONTROL ROOM</small>
+          <h2>Settings & Save</h2>
+        </div>
+        <button class="dialog-close icon-button" value="close" aria-label="Close settings">×</button>
+      </header>
+      <section class="setting-section">
+        <h3>Audio</h3>
+        <label class="slider-setting">
+          <span><b>Music</b><output id="musicVolumeOutput">58%</output></span>
+          <input id="musicVolume" type="range" min="0" max="100" value="58">
+        </label>
+        <label class="slider-setting">
+          <span><b>Sound Effects</b><output id="sfxVolumeOutput">70%</output></span>
+          <input id="sfxVolume" type="range" min="0" max="100" value="70">
+        </label>
+        <label class="check-setting">
+          <input id="muteToggle" type="checkbox">
+          <span>Mute all audio</span>
+        </label>
+      </section>
+      <section class="setting-section">
+        <h3>Display</h3>
+        <label class="check-setting">
+          <input id="compactToggle" type="checkbox" checked>
+          <span>Use compact large numbers</span>
+        </label>
+        <button id="dialogFullscreenButton" class="secondary-button" type="button">TOGGLE FULLSCREEN (F11)</button>
+      </section>
+      <section class="setting-section">
+        <h3>Save Data</h3>
+        <div class="save-actions">
+          <button id="exportButton" class="secondary-button" type="button">EXPORT SAVE</button>
+          <button id="importButton" class="secondary-button" type="button">IMPORT SAVE</button>
+          <button id="resetButton" class="danger-button" type="button">RESET GAME</button>
+        </div>
+        <textarea id="saveText" rows="4" placeholder="Exported save data appears here. Paste save data here before Import."></textarea>
+      </section>
+      <p class="audio-credit">“Midnight Batch” is an original seamless stereo theme generated for Jackpot Bakery at 48,000 Hz / 16-bit PCM.</p>
+    </form>
+  </dialog>
+
+  <dialog id="confirmDialog" class="pixel-dialog confirm-dialog">
+    <form method="dialog" class="dialog-frame">
+      <header><div><small>ARE YOU SURE?</small><h2 id="confirmTitle">Confirm</h2></div></header>
+      <p id="confirmMessage"></p>
+      <div class="confirm-actions">
+        <button class="secondary-button" value="cancel">CANCEL</button>
+        <button id="confirmAccept" class="danger-button" value="confirm">CONFIRM</button>
+      </div>
+    </form>
+  </dialog>
+
+  <audio id="themeMusic" loop preload="auto" src="assets/audio/jackpot-bakery-theme-48k.wav"></audio>
+  <script src="core.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
