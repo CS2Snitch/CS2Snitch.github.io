@@ -1,0 +1,47 @@
+{
+  "name": "jackpot-bakery",
+  "version": "1.1.0",
+  "description": "Original retro pixel-art incremental arcade game with fictional slot mechanics.",
+  "main": "main.js",
+  "author": "Snitch Studio",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "npm run generate:music && electron .",
+    "generate:music": "node scripts/generate-music.js",
+    "test": "node --test tests/*.test.js",
+    "build:win": "npm run generate:music && npm test && electron-builder --win portable --x64",
+    "build:dir": "npm run generate:music && npm test && electron-builder --win dir --x64"
+  },
+  "devDependencies": {
+    "electron": "37.2.6",
+    "electron-builder": "26.0.12"
+  },
+  "build": {
+    "appId": "studio.snitch.jackpotbakery",
+    "productName": "Jackpot Bakery",
+    "asar": true,
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "index.html",
+      "styles.css",
+      "core.js",
+      "game.js",
+      "main.js",
+      "preload.js",
+      "assets/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ],
+      "artifactName": "Jackpot_Bakery_${version}_Windows_x64.${ext}"
+    }
+  }
+}
