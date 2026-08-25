@@ -1,0 +1,104 @@
+name: Build Jackpot Bakery
+
+on:
+  push:
+    branches:
+      - codex/jackpot-bakery-v1.1.0
+    paths:
+      - "jackpot-bakery/**"
+      - ".github/workflows/build-jackpot-bakery.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out protected build branch
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Create reproducible dependency lock
+        working-directory: jackpot-bakery
+        run: npm install --package-lock-only --ignore-scripts
+
+      - name: Install exact dependencies
+        working-directory: jackpot-bakery
+        run: npm ci
+
+      - name: Generate original 48 kHz theme
+        working-directory: jackpot-bakery
+        run: npm run generate:music
+
+      - name: Run 18 automated tests
+        working-directory: jackpot-bakery
+        run: npm test
+
+      - name: Build portable Windows game
+        working-directory: jackpot-bakery
+        run: npx electron-builder --win portable --x64 --publish never
+
+      - name: Build Steam depot folder
+        working-directory: jackpot-bakery
+        run: npx electron-builder --win dir --x64 --publish never
+
+      - name: Verify generated audio header
+        shell: pwsh
+        run: |
+          $audio = [System.IO.File]::ReadAllBytes("jackpot-bakery/assets/audio/jackpot-bakery-theme-48k.wav")
+          $channels = [BitConverter]::ToUInt16($audio, 22)
+          $sampleRate = [BitConverter]::ToUInt32($audio, 24)
+          $bits = [BitConverter]::ToUInt16($audio, 34)
+          if ($channels -ne 2 -or $sampleRate -ne 48000 -or $bits -ne 16) {
+            throw "Theme validation failed: channels=$channels rate=$sampleRate bits=$bits"
+          }
+          Write-Host "Validated stereo 48,000 Hz / 16-bit PCM theme."
+
+      - name: Package source, portable game, and Steam depot
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path "release/source", "release/windows", "release/steam" | Out-Null
+          $sourceFiles = @(
+            "package.json", "package-lock.json", "main.js", "preload.js",
+            "index.html", "styles.css", "core.js", "game.js",
+            "Play_Jackpot_Bakery.bat", "Build_Windows.bat",
+            "README.md", "STEAM_RELEASE_CHECKLIST.md"
+          )
+          foreach ($file in $sourceFiles) {
+            Copy-Item "jackpot-bakery/$file" "release/source/$file"
+          }
+          Copy-Item "jackpot-bakery/assets" "release/source/assets" -Recurse
+          Copy-Item "jackpot-bakery/scripts" "release/source/scripts" -Recurse
+          Copy-Item "jackpot-bakery/tests" "release/source/tests" -Recurse
+
+          $portable = Get-ChildItem "jackpot-bakery/dist" -Filter "*.exe" | Where-Object { $_.Name -like "Jackpot_Bakery_*" } | Select-Object -First 1
+          if (-not $portable) { throw "Portable Windows executable was not created." }
+          Copy-Item $portable.FullName "release/windows/$($portable.Name)"
+          Copy-Item "jackpot-bakery/README.md" "release/windows/README.md"
+          Copy-Item "jackpot-bakery/STEAM_RELEASE_CHECKLIST.md" "release/windows/STEAM_RELEASE_CHECKLIST.md"
+
+          Copy-Item "jackpot-bakery/dist/win-unpacked/*" "release/steam/" -Recurse
+
+          Compress-Archive -Path "release/source/*" -DestinationPath "release/Jackpot_Bakery_v1.1.0_Source.zip" -CompressionLevel Optimal
+          Compress-Archive -Path "release/windows/*" -DestinationPath "release/Jackpot_Bakery_v1.1.0_Windows.zip" -CompressionLevel Optimal
+          Compress-Archive -Path "release/steam/*" -DestinationPath "release/Jackpot_Bakery_v1.1.0_SteamDepot.zip" -CompressionLevel Optimal
+
+      - name: Upload verified release package
+        uses: actions/upload-artifact@v4
+        with:
+          name: Jackpot_Bakery_v1.1.0
+          path: |
+            release/Jackpot_Bakery_v1.1.0_Source.zip
+            release/Jackpot_Bakery_v1.1.0_Windows.zip
+            release/Jackpot_Bakery_v1.1.0_SteamDepot.zip
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30
