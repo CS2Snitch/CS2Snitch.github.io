@@ -4,80 +4,27 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#17140f" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <title>RetroWave TV</title>
-  <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.webmanifest?v=3" />
+  <link rel="stylesheet" href="styles.css?v=3" />
 </head>
 <body>
   <header class="topbar">
     <div class="brand"><span class="brand-mark">RW</span><span>RetroWave TV</span></div>
-    <nav>
-      <button class="nav-btn active" data-view="live">Live TV</button>
-      <button class="nav-btn" data-view="guide">Guide</button>
-      <button class="nav-btn" data-view="library">On Demand</button>
-      <a class="admin-link" href="admin.html">Admin</a>
-    </nav>
+    <nav><button class="nav-btn active" data-view="live">Live TV</button><button class="nav-btn" data-view="guide">Guide</button><button class="nav-btn" data-view="library">On Demand</button><a class="admin-link" href="admin.html?v=3">Admin</a></nav>
   </header>
-
   <main>
     <section id="live" class="view active">
       <div class="hero-grid">
-        <div class="tv-shell">
-          <div class="tv-screen">
-            <video id="player" controls playsinline preload="metadata"></video>
-            <div id="playerPlaceholder" class="player-placeholder">
-              <div class="scanlines"></div>
-              <div class="station-id">RETROWAVE</div>
-              <p>Select a verified title to begin.</p>
-            </div>
-          </div>
-          <div class="tv-controls"><span>VHF</span><span class="dial"></span><span>UHF</span><span class="dial"></span></div>
-        </div>
-
-        <aside class="now-panel">
-          <div class="eyebrow">NOW PLAYING</div>
-          <h1 id="nowTitle">The Great Train Robbery</h1>
-          <p id="nowMeta">1903 · Short · Public domain</p>
-          <div class="progress"><div id="progressBar"></div></div>
-          <div class="progress-meta"><span id="startTime">10:45 PM</span><span id="remaining">12 min</span></div>
-          <button id="watchBtn" class="primary">Watch Live</button>
-          <div class="up-next">
-            <span>UP NEXT</span>
-            <strong id="upNextTitle">Within Our Gates</strong>
-          </div>
-        </aside>
+        <div class="tv-shell"><div class="tv-screen"><video id="player" controls playsinline preload="metadata"></video><div id="playerPlaceholder" class="player-placeholder"><div class="scanlines"></div><div class="station-id">RETROWAVE</div><p>Loading live channel…</p></div></div><div class="tv-controls"><span>VHF</span><span class="dial"></span><span>UHF</span><span class="dial"></span></div></div>
+        <aside class="now-panel"><div class="eyebrow">NOW PLAYING</div><h1 id="nowTitle">Loading…</h1><p id="nowMeta">RetroWave live schedule</p><div class="progress"><div id="progressBar"></div></div><div class="progress-meta"><span id="startTime">Live</span><span id="remaining">—</span></div><button id="watchBtn" class="primary">Watch Live</button><div class="up-next"><span>UP NEXT</span><strong id="upNextTitle">—</strong></div></aside>
       </div>
-
-      <section class="section-wrap">
-        <div class="section-heading"><div><span class="eyebrow">CHANNELS</span><h2>Turn the dial</h2></div></div>
-        <div id="channelGrid" class="channel-grid"></div>
-      </section>
+      <section class="section-wrap"><div class="section-heading"><div><span class="eyebrow">CHANNELS</span><h2>Turn the dial</h2></div></div><div id="channelGrid" class="channel-grid"></div></section>
     </section>
-
-    <section id="guide" class="view">
-      <div class="section-wrap">
-        <span class="eyebrow">TONIGHT</span><h1>Program Guide</h1>
-        <p class="lede">A synchronized old-school schedule. Everyone on a channel sees the same program position.</p>
-        <div id="guideGrid" class="guide-grid"></div>
-      </div>
-    </section>
-
-    <section id="library" class="view">
-      <div class="section-wrap">
-        <div class="library-head">
-          <div><span class="eyebrow">ARCHIVE</span><h1>On Demand</h1></div>
-          <input id="search" type="search" placeholder="Search title, year, genre…" />
-        </div>
-        <div id="libraryGrid" class="library-grid"></div>
-      </div>
-    </section>
+    <section id="guide" class="view"><div class="section-wrap"><span class="eyebrow">TODAY</span><h1>Program Guide</h1><p class="lede">Channels run continuously. Join a channel and you enter the program already in progress.</p><div id="guideGrid" class="guide-grid"></div></div></section>
+    <section id="library" class="view"><div class="section-wrap"><div class="library-head"><div><span class="eyebrow">ARCHIVE</span><h1>On Demand</h1></div><input id="search" type="search" placeholder="Search title, year, genre…" /></div><div id="libraryGrid" class="library-grid"></div></div></section>
   </main>
-
-  <footer>
-    <strong>RetroWave TV</strong>
-    <span>Only publish media whose rights status you have documented.</span>
-  </footer>
-
-  <script src="app.js"></script>
-</body>
-</html>
+  <footer><strong>RetroWave TV</strong><span>Rights-first public-domain programming.</span></footer>
+  <script src="app.js?v=3"></script>
+</body></html>
