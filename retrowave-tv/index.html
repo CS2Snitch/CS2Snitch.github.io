@@ -3,46 +3,48 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#050505">
+  <meta name="theme-color" content="#030303">
   <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <link rel="canonical" href="https://cs2snitch.com/retrowave-tv/">
   <script>if(location.protocol==='http:'&&!['localhost','127.0.0.1'].includes(location.hostname))location.replace('https://'+location.host+location.pathname+location.search+location.hash);</script>
   <title>RetroWave TV</title>
-  <link rel="manifest" href="manifest.webmanifest?v=8">
-  <link rel="stylesheet" href="styles.css?v=8">
+  <link rel="manifest" href="manifest.webmanifest?v=9">
+  <link rel="stylesheet" href="styles.css?v=9">
 </head>
 <body>
   <header class="topbar">
-    <div class="neon-logo" aria-label="RetroWave TV"><span>RETROWAVE</span><em>TV</em></div>
-    <div class="brand-mark">RW</div>
-    <nav>
-      <button class="nav-btn active" data-view="live">Live TV</button>
-      <button class="nav-btn" data-view="guide">Guide</button>
-      <button class="nav-btn" data-view="library">On Demand</button>
-      <button class="nav-btn" data-view="about">About</button>
-      <a class="admin-link" href="admin.html?v=8">Admin</a>
-    </nav>
+    <div class="header-inner">
+      <div class="neon-logo" aria-label="RetroWave TV"><span>RETROWAVE</span><em>TV</em></div>
+      <div class="brand-mark">RW</div>
+      <nav>
+        <button class="nav-btn active" data-view="live">Live TV</button>
+        <button class="nav-btn" data-view="guide">Guide</button>
+        <button class="nav-btn" data-view="library">On Demand</button>
+        <button class="nav-btn" data-view="about">About</button>
+        <a class="admin-link" href="admin.html?v=9">Admin</a>
+      </nav>
+    </div>
   </header>
 
   <main>
     <section id="live" class="view active">
       <div class="page-shell">
-        <section class="copyright-banner" aria-label="Copyright notice">
-          <div class="warning-icon">!</div>
+        <section class="copyright-banner">
+          <div class="warning-triangle"><span>!</span></div>
           <div class="copyright-copy">
             <h2>COPYRIGHT NOTICE</h2>
-            <p>RetroWave TV is intended to feature only content verified as public domain or licensed for reuse. If you believe any content infringes copyright, please contact us and we will review it promptly.</p>
+            <p>RetroWave TV only features content that is in the public domain or licensed for reuse. We do not intentionally publish copyrighted material without permission. If you believe any content violates copyright, please contact us and it will be reviewed promptly.</p>
           </div>
           <div class="rights-callout">
-            <div class="shield">▣</div>
-            <strong>PUBLIC DOMAIN<br>OR LICENSED<br>CONTENT ONLY.</strong>
+            <div class="shield-icon">🔒</div>
+            <strong>ALL CONTENT ON<br>RETROWAVE TV IS<br>PUBLIC DOMAIN OR<br>LICENSED FOR REUSE.</strong>
           </div>
         </section>
 
-        <section class="tv-console" aria-label="RetroWave television player">
+        <section class="tv-console">
           <div class="tv-left">
-            <div class="tv-screen-wrap">
+            <div class="tv-screen-frame">
               <div class="tv-screen">
                 <video id="player" playsinline preload="metadata"></video>
                 <div id="playerPlaceholder" class="player-placeholder">
@@ -53,17 +55,24 @@
               </div>
             </div>
             <div class="physical-controls" aria-label="TV playback controls">
-              <button id="back10" class="tv-button" aria-label="Back 10 seconds"><span class="control-symbol">↶</span><span class="control-number">10</span><b>BACK 10</b></button>
-              <button id="playPause" class="tv-button" aria-label="Play or pause"><span class="control-symbol">▶</span><b>PLAY / PAUSE</b></button>
-              <button id="forward10" class="tv-button" aria-label="Forward 10 seconds"><span class="control-symbol">↷</span><span class="control-number">10</span><b>FWD 10</b></button>
-              <button id="muteBtn" class="tv-button" aria-label="Mute or unmute"><span class="control-symbol">🔊</span><b>MUTE</b></button>
-              <button id="fullscreenBtn" class="tv-button" aria-label="Fullscreen"><span class="control-symbol">⛶</span><b>FULLSCREEN</b></button>
+              <button id="back10" class="tv-button"><span class="control-symbol">↶</span><span class="control-number">10</span><b>BACK 10</b></button>
+              <button id="playPause" class="tv-button"><span class="control-symbol">▶</span><b>PLAY / PAUSE</b></button>
+              <button id="forward10" class="tv-button"><span class="control-symbol">↷</span><span class="control-number">10</span><b>FWD 10</b></button>
+              <button id="muteBtn" class="tv-button"><span class="control-symbol">🔊</span><b>MUTE</b></button>
+              <button id="fullscreenBtn" class="tv-button"><span class="control-symbol">⛶</span><b>FULLSCREEN</b></button>
             </div>
           </div>
-          <aside class="tv-side-panel" aria-label="Vintage TV tuner controls">
-            <div class="tuner-block"><strong>VHF</strong><div class="tuner-numbers"><span>3</span><span>5</span><span>6</span><span>7</span><span>12</span></div><div class="big-dial"><i></i></div></div>
-            <div class="tuner-block"><strong>UHF</strong><div class="tuner-numbers"><span>20</span><span>30</span><span>40</span><span>60</span><span>80</span></div><div class="big-dial small"><i></i></div></div>
-            <div class="speaker-grille" aria-hidden="true"></div>
+
+          <aside class="tv-side-panel">
+            <div class="tuner-block">
+              <strong>VHF</strong>
+              <div class="dial-wrap"><div class="dial-labels"><span>3</span><span>5</span><span>6</span><span>7</span><span>12</span></div><div class="big-dial"><i></i></div></div>
+            </div>
+            <div class="tuner-block">
+              <strong>UHF</strong>
+              <div class="dial-wrap"><div class="dial-labels"><span>20</span><span>30</span><span>40</span><span>60</span><span>80</span></div><div class="big-dial uhf"><i></i></div></div>
+            </div>
+            <div class="speaker-grille"></div>
           </aside>
         </section>
 
@@ -75,7 +84,7 @@
             <div class="progress"><div id="progressBar"></div></div>
             <div class="progress-meta"><span id="startTime">Live</span><span id="remaining">—</span></div>
           </div>
-          <button id="watchBtn" class="watch-live"><span>▣</span> Watch Live</button>
+          <button id="watchBtn" class="watch-live">▣ <span>Watch Live</span></button>
         </section>
 
         <div class="up-next-line"><span>UP NEXT</span><strong id="upNextTitle">—</strong></div>
@@ -91,15 +100,16 @@
 
     <section id="library" class="view"><div class="page-shell section-wrap"><div class="library-head"><div><span class="eyebrow">EXPANDED ARCHIVE</span><h1>On Demand</h1></div><input id="search" type="search" placeholder="Search horror, cartoons, sci-fi…"></div><div id="libraryGrid" class="library-grid"></div></div></section>
 
-    <section id="about" class="view"><div class="page-shell about-page"><span class="eyebrow">ABOUT RETROWAVE TV</span><h1>Old screens. Free culture.</h1><p>RetroWave TV is a fan-built streaming project centered on films, shorts, cartoons, television and historical media that have a documented public-domain or reusable-license basis. We verify the rights basis for each title before adding it to the playable catalog.</p><div class="about-box"><h2>Rights policy</h2><p>Public-domain status can vary by country and by specific copy. Restorations, soundtracks, subtitles, scans and remasters may carry separate rights. RetroWave TV therefore treats the exact playable asset—not just the underlying title—as the item that must be cleared.</p></div></div></section>
+    <section id="about" class="view"><div class="page-shell about-page"><span class="eyebrow">ABOUT RETROWAVE TV</span><h1>Old screens. Free culture.</h1><p>RetroWave TV is a fan-built streaming project centered on films, shorts, cartoons, television and historical media with a documented public-domain or reusable-license basis.</p><div class="about-box"><h2>Rights policy</h2><p>We verify the specific playable copy before adding it. Public-domain status can vary by territory, and restorations, soundtracks, subtitles, scans and remasters may carry separate rights.</p></div></div></section>
   </main>
 
   <footer class="legal-footer">
     <p>RetroWave TV is a fan project and is not affiliated with any film studio or copyright holder.</p>
-    <p>Content is provided for entertainment and archival appreciation. Use of this site constitutes acceptance of our terms.</p>
+    <p>All content is provided for entertainment and archival appreciation.</p>
+    <p>Use of this site constitutes acceptance of our terms.</p>
     <p>© 2026 RetroWave TV</p>
   </footer>
 
-  <script src="app.js?v=8"></script>
+  <script src="app.js?v=9"></script>
 </body>
 </html>
